@@ -1,0 +1,41 @@
+https://leetcode.com/problems/middle-of-the-linked-list/submissions/
+
+brute force :
+
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+      int c=0,c1=0;
+      ListNode* temp1 = head;
+      ListNode* temp2 = head;
+      ListNode* temp3;
+        while(temp1!=NULL){
+           c++;
+           temp1 = temp1->next;
+        }
+        while(temp2!=NULL){
+            if(c1==c/2){
+               return temp2; 
+            }
+            c1++;
+            temp2 = temp2->next;
+        }
+        return temp2;
+    }
+};
+
+
+optimized method : 
+
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+     ListNode* s= head;
+     ListNode* f = head;
+        while(f!=NULL && f->next!=NULL){
+            s = s->next;
+            f = f->next->next;
+        }
+        return s;
+    }
+};
