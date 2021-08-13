@@ -1,0 +1,42 @@
+https://leetcode.com/problems/palindrome-linked-list/submissions/
+
+class Solution {
+public:
+   ListNode* reverse(ListNode* head){
+       
+       ListNode* curr=head;
+       ListNode* prev=NULL;
+       ListNode* nxt;
+       while(curr!=NULL){
+           nxt = curr->next;
+           curr->next=prev;
+           prev = curr;
+           curr = nxt;
+       }
+       return prev;
+   }
+    bool isPalindrome(ListNode* head) {
+        ListNode* temp = head;
+        ListNode* fast=head;
+        ListNode* slow=head;
+       if(head==NULL || head->next==NULL){
+           return true;
+       }
+        while(fast->next!=NULL && fast->next->next!=NULL){
+            slow= slow->next;
+            fast = fast->next->next;
+        }
+        
+        slow->next = reverse(slow->next);
+        slow = slow->next;
+        while(slow!=NULL){
+            if(temp->val!=slow->val){
+                return false;
+            }
+            temp = temp->next;
+            slow = slow->next;
+        }
+        return true;
+    }
+    
+};
