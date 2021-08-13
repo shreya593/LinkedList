@@ -1,0 +1,39 @@
+https://leetcode.com/problems/reverse-nodes-in-k-group/submissions/
+
+class Solution {
+public:
+    ListNode* reverseKGroup1(ListNode* head, int k,int count){
+         ListNode* curr = head;
+        ListNode* prev = NULL;
+        ListNode* nxt;
+        int c=0;
+        if(count==0){
+            return head;
+        }
+        if(head==NULL){
+            return head;
+        }
+        while(curr!=NULL && c<k){
+            nxt = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr=nxt;
+            c++;
+        }
+        if(nxt!=NULL){
+            head->next = reverseKGroup1(nxt, k,count-1);
+        }
+        return prev;
+        
+    }
+    ListNode* reverseKGroup(ListNode* head, int k) {
+       ListNode* temp = head;
+        int s=0;
+        while(temp!=NULL){
+            temp = temp->next;
+            s++;
+        }
+        s = s/k;
+       return  reverseKGroup1(head,k,s);
+    }
+};
